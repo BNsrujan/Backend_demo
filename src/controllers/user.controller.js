@@ -29,6 +29,7 @@ const generateAccessAndRefereshTokens = async (userId) => {
     }
 }
 
+
 // Register a new user function
 const registerUser = asyncHandler(async (req, res) => {
     // Destructure user input from the request body
@@ -135,9 +136,9 @@ const loginUser = asyncHandler(async (req, res) => {
 
     // Return response with tokens and user data, and set cookies
     return res
+        .cookie("refreshToken", refreshToken, options)
         .status(200)
         .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
         .json(
             new ApiResponse(
                 200,

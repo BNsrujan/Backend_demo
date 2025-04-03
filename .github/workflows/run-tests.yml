@@ -1,0 +1,31 @@
+name: Run Playwright Test
+
+on:
+  push: 
+    branches: [master,main]
+  pull_request: 
+    branches: [master,main]
+
+jobs:
+    # example_matrix:
+    #     strategy:
+    #         matrix:
+    #             os:[ubuntu-latest,windows-latest]
+    #             version:[10,12,14]
+    #     runs-on:${{matrix.os}}
+  build: 
+    run-on:ubuntu-latest
+    steps:    
+        - uses: actions/checkout@v2  # use a prebuilt action or step like get your code from the repositery and setup a node
+        - uses: actions/setup-node@v2
+            with:
+                node-version:18
+        - run : npm ci # clean install with is required for the automated enveronament
+        - run : npx playwright install --with-deps
+        - run : npx playwright test
+        - uses: actions/upload-artifact@v3
+            if: always()
+            with:   
+                name: playwright-report
+                path: playwright-report/
+                retention-days:30

@@ -1,0 +1,25 @@
+name: publish to NPM
+
+on:
+  release:
+    types: [created] #publish on release
+
+    # u will add some note's about the new relies and publish
+    # and i the workflow the
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        # publisting the to npm
+        with:
+          node-version: "18.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm cli
+      - run: npm run build
+      - name: publish package to NPM
+        run: npm publish
+        env:
+          NODE AUTH TOKEN: ${{ secrets.NPM_TOKEN }}

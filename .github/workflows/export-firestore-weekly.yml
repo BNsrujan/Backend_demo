@@ -1,0 +1,15 @@
+name: Export Firestore Data
+
+# act CLI - local testing
+# gh CLI - production stuff
+
+on:
+workflow_dispatch: # manual trigger
+  schedule:
+    - cron: "0 0 * * 0" #scheduled job arbitary code one a spacifick scgual
+
+# custom actions or steps = github actions toolkit
+
+#https://github.com/nektos/act?tab=readme-ov-file
+#https://cli.github.com/
+#https://github.com/sdras/awesome-actions
